@@ -1,0 +1,29 @@
+# Git ignore for Open WebUI + Snowflake MCP Demo
+
+# Credentials with real PATs (template is tracked)
+config/user_credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

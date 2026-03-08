@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui-data:/app/backend/data
+      - ./config/user_credentials.json:/app/backend/data/user_credentials.json:ro
+    environment:
+      - WEBUI_AUTH=true
+      - ENABLE_SIGNUP=true
+    restart: unless-stopped
+
+volumes:
+  open-webui-data:
