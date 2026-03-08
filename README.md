@@ -139,7 +139,15 @@ docker-compose up -d
 
 This downloads and starts Open WebUI. Wait ~30 seconds for startup, then open: **http://localhost:3002**
 
-**First time**: Create an admin account (this becomes the Open WebUI admin, not Snowflake).
+#### First-Time Setup:
+
+1. Click **Get Started**
+2. You'll be prompted to create an **Admin Account**
+3. Enter any name, email, and password (e.g., `admin@demo.local` / `admin123`)
+4. This is the Open WebUI administrator - separate from Snowflake users
+5. Click **Create Admin Account**
+
+You should now see the Open WebUI chat interface.
 
 To stop later: `docker-compose down`
 
