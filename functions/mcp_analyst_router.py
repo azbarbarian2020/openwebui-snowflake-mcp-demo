@@ -19,8 +19,8 @@ class Filter:
             description="Path to user credentials JSON file"
         )
         knowledge_id: str = Field(
-            default="6e2a5a65-ac3b-4c71-9cf4-84c2ac415885",
-            description="Knowledge base collection ID for RAG queries"
+            default="REPLACE_WITH_YOUR_KNOWLEDGE_BASE_ID",
+            description="Knowledge base collection ID for RAG queries (get from URL after creating knowledge base)"
         )
         vector_db_path: str = Field(
             default="/app/backend/data/vector_db",

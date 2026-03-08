@@ -213,14 +213,18 @@ To stop later: `docker-compose down`
 5. Click **+ Add Content** → **Upload Files**
 6. Upload [`docs/Technician_Reviews_2025.pdf`](./docs/Technician_Reviews_2025.pdf)
 7. Wait for processing to complete
-8. **Copy the Knowledge Base ID** from the URL: `http://localhost:3000/workspace/knowledge/{THIS-ID}`
+8. **Copy the Knowledge Base ID** from the URL: `http://localhost:3002/workspace/knowledge/{THIS-ID}`
 
 #### Update Filter Function with Knowledge Base ID:
 
 1. Go back to **Admin Panel** → **Functions**
 2. Click on your **MCP Analyst Router** function
-3. Find the `knowledge_id` valve and paste your Knowledge Base ID
-4. Save
+3. Find the `knowledge_id` valve and paste your Knowledge Base ID (just the UUID, e.g., `67156cd0-97ca-4df1-9d44-a3dd6c47d35b`)
+4. Click **Save**
+5. **Restart the container** to reload the function:
+   ```bash
+   docker-compose restart
+   ```
 
 ---
 
@@ -280,15 +284,33 @@ Ask: **"Tell me about Sarah Chen's performance review"**
 - Run `SHOW PARAMETERS LIKE 'NETWORK_POLICY' IN ACCOUNT;` to see current policy
 
 ### RAG not working
-- Verify Knowledge Base ID is correct in function valves
-- Ensure PDF was uploaded and processed (shows green checkmark)
+- Verify Knowledge Base ID is correct in function valves (just the UUID, no leading slash)
+- Click into the knowledge base and verify you can see the PDF content
+- Restart the container after updating the knowledge_id valve: `docker-compose restart`
+- Check logs: `docker logs open-webui-mcp-demo 2>&1 | grep -i "MCP Router" | tail -20`
 
 ### Docker issues
 ```bash
 docker-compose down
 docker-compose up -d
-docker logs open-webui
+docker logs open-webui-mcp-demo
 ```
+
+### Credentials file appears as directory
+If you see `[Errno 21] Is a directory` in logs, Docker created a directory instead of mounting the file:
+```bash
+docker-compose down
+docker volume rm openwebui-snowflake-mcp-demo_open-webui-mcp-demo-data
+rm -rf config/user_credentials.json
+cp config/user_credentials.template.json config/user_credentials.json
+# Edit config/user_credentials.json with your PATs
+docker-compose up -d
+```
+
+### Model not selected
+- Ensure Ollama is running: `curl http://localhost:11434/api/tags`
+- Check Ollama connection in Admin Panel → Settings → Connections
+- Ollama URL should be: `http://host.docker.internal:11434`
 
 ---
 
