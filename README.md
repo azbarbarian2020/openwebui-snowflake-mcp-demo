@@ -30,11 +30,20 @@ A complete demonstration of using [Open WebUI](https://openwebui.com/) as a unif
 
 ## Quick Start
 
-### Step 1: Run Snowflake Setup (5 min)
+### Step 1: Clone This Repository
+
+```bash
+git clone https://github.com/azbarbarian2020/openwebui-snowflake-mcp-demo.git
+cd openwebui-snowflake-mcp-demo
+```
+
+---
+
+### Step 2: Run Snowflake Setup (5 min)
 
 1. Log into [Snowsight](https://app.snowflake.com) as ACCOUNTADMIN
 2. Open a new SQL Worksheet
-3. Copy the entire contents of [`snowflake_setup.sql`](./snowflake_setup.sql)
+3. Copy the entire contents of `snowflake_setup.sql` from this repository
 4. Paste and run (click "Run All" or Ctrl+Shift+Enter)
 
 **Expected Result**: All verification queries at the end should show:
@@ -44,7 +53,7 @@ A complete demonstration of using [Open WebUI](https://openwebui.com/) as a unif
 
 ---
 
-### Step 2: Generate Personal Access Tokens (10 min)
+### Step 3: Generate Personal Access Tokens (10 min)
 
 You need PATs for three users: **WEST_USER**, **EAST_USER**, and your **admin user**.
 
@@ -64,11 +73,11 @@ You need PATs for three users: **WEST_USER**, **EAST_USER**, and your **admin us
 2. Go to **Authentication** tab
 3. Generate a PAT the same way
 
-**Save all three PATs** - you'll need them in Step 4.
+**Save all three PATs** - you'll need them in Step 5.
 
 ---
 
-### Step 3: Get Your Account Identifier
+### Step 4: Get Your Account Identifier
 
 Your Snowflake account identifier is in your URL:
 
@@ -77,7 +86,7 @@ Your Snowflake account identifier is in your URL:
 
 ---
 
-### Step 4: Configure Credentials (5 min)
+### Step 5: Configure Credentials (5 min)
 
 1. Copy the template:
    ```bash
@@ -120,19 +129,23 @@ Your Snowflake account identifier is in your URL:
 
 ---
 
-### Step 5: Start Open WebUI (2 min)
+### Step 6: Start Open WebUI (2 min)
+
+From the repository directory, start the Docker container:
 
 ```bash
 docker-compose up -d
 ```
 
-Wait ~30 seconds for startup, then open: **http://localhost:3000**
+This downloads and starts Open WebUI. Wait ~30 seconds for startup, then open: **http://localhost:3000**
 
 **First time**: Create an admin account (this becomes the Open WebUI admin, not Snowflake).
 
+To stop later: `docker-compose down`
+
 ---
 
-### Step 6: Install the Filter Function (5 min)
+### Step 7: Install the Filter Function (5 min)
 
 1. In Open WebUI, click **your avatar** (top right) → **Admin Panel**
 2. Go to **Functions** tab
@@ -145,7 +158,7 @@ Wait ~30 seconds for startup, then open: **http://localhost:3000**
 
 ---
 
-### Step 7: Create Knowledge Base for RAG (5 min)
+### Step 8: Create Knowledge Base for RAG (5 min)
 
 1. Go to **Workspace** → **Knowledge**
 2. Click **+ Create Knowledge Base**
@@ -165,7 +178,7 @@ Wait ~30 seconds for startup, then open: **http://localhost:3000**
 
 ---
 
-### Step 8: Create Test Users (5 min)
+### Step 9: Create Test Users (5 min)
 
 1. Go to **Admin Panel** → **Users**
 2. Create these users (passwords can be anything for demo):
@@ -180,7 +193,7 @@ Wait ~30 seconds for startup, then open: **http://localhost:3000**
 
 ---
 
-### Step 9: Test the Demo (5 min)
+### Step 10: Test the Demo (5 min)
 
 #### Test 1: Row-Level Security
 
