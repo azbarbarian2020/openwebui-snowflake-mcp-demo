@@ -168,9 +168,10 @@ Open WebUI is a chat interface that needs a language model to process queries. T
    - **Mac**: `brew install ollama` or download from [ollama.ai](https://ollama.ai)
    - **Windows/Linux**: Download from [ollama.ai](https://ollama.ai)
 
-2. **Start Ollama and download a model**:
+2. **Start Ollama and download a model** (run from any terminal):
    ```bash
-   ollama serve        # Start the Ollama server (runs in background)
+   ollama serve          # Start the Ollama server (keep this running)
+   # In a new terminal:
    ollama pull llama3.2  # Download a capable, lightweight model (~2GB)
    ```
 
