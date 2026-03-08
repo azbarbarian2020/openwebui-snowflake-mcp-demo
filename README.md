@@ -137,7 +137,7 @@ From the repository directory, start the Docker container:
 docker-compose up -d
 ```
 
-This downloads and starts Open WebUI. Wait ~30 seconds for startup, then open: **http://localhost:3001**
+This downloads and starts Open WebUI. Wait ~30 seconds for startup, then open: **http://localhost:3002**
 
 **First time**: Create an admin account (this becomes the Open WebUI admin, not Snowflake).
 
