@@ -29,6 +29,12 @@ A complete demonstration of using [Open WebUI](https://openwebui.com/) as a unif
 
 ---
 
+## Setup Flow
+
+![Setup Flow](docs/setup-flow.png)
+
+---
+
 ## Quick Start
 
 ### Step 1: Clone This Repository
