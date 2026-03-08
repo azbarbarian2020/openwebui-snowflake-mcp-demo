@@ -143,9 +143,11 @@ This downloads and starts Open WebUI. Wait ~30 seconds for startup, then open: *
 
 1. Click **Get Started**
 2. You'll be prompted to create an **Admin Account**
-3. Enter any name, email, and password (e.g., `admin@demo.local` / `admin123`)
-4. This is the Open WebUI administrator - separate from Snowflake users
+3. Use `admin@demo.local` as the email (the `admin` part must match the key in `user_credentials.json`)
+4. Enter any name and password (e.g., `Admin User` / `admin123`)
 5. Click **Create Admin Account**
+
+**Important**: The username (part before `@`) determines which Snowflake credentials are used. Using `admin@demo.local` maps to the `admin` entry in `user_credentials.json`, giving full Snowflake access + RAG access.
 
 You should now see the Open WebUI chat interface.
 
