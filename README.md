@@ -251,6 +251,17 @@ The `web_user` needs explicit access to query the knowledge base:
 4. Add `web_user@demo.local` to the access list
 5. Save
 
+#### Set Default Model for All Users:
+
+New users won't have a model selected by default. Configure a default:
+
+1. As admin, go to **Admin Panel** → **Settings** → **Interface**
+2. Find **Default Model** setting
+3. Select `llama3.2` (or your preferred model)
+4. Click **Save**
+
+Alternatively, each user can select a model from the dropdown when they first log in.
+
 ---
 
 ### Step 11: Test the Demo (5 min)
