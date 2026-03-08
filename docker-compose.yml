@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
+    container_name: open-webui-mcp-demo
     ports:
-      - "3000:8080"
+      - "3001:8080"
     volumes:
-      - open-webui-data:/app/backend/data
+      - open-webui-mcp-demo-data:/app/backend/data
       - ./config/user_credentials.json:/app/backend/data/user_credentials.json:ro
     environment:
       - WEBUI_AUTH=true
@@ -15,4 +13,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  open-webui-data:
+  open-webui-mcp-demo-data:
