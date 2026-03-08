@@ -212,7 +212,7 @@ To stop later: `docker-compose down`
 4. Click **Create**
 5. Click **+ Add Content** → **Upload Files**
 6. Upload [`docs/Technician_Reviews_2025.pdf`](./docs/Technician_Reviews_2025.pdf)
-7. Wait for processing to complete
+7. Wait for processing to complete (you should be able to see the PDF content when you click on it)
 8. **Copy the Knowledge Base ID** from the URL: `http://localhost:3002/workspace/knowledge/{THIS-ID}`
 
 #### Update Filter Function with Knowledge Base ID:
@@ -240,6 +240,16 @@ To stop later: `docker-compose down`
 | `web_user@demo.local` | web_user | User |
 
 **Important**: The username (before @) must match the keys in `user_credentials.json`
+
+#### Grant web_user Access to Knowledge Base:
+
+The `web_user` needs explicit access to query the knowledge base:
+
+1. Go to **Workspace** → **Knowledge**
+2. Click on **Technician Reviews**
+3. Click the **Share** or **Access** button (gear icon or share icon)
+4. Add `web_user@demo.local` to the access list
+5. Save
 
 ---
 
