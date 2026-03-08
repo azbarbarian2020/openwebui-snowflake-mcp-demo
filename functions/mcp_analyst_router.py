@@ -20,11 +20,7 @@ class Filter:
         )
         knowledge_id: str = Field(
             default="REPLACE_WITH_YOUR_KNOWLEDGE_BASE_ID",
-            description="Knowledge base collection ID for RAG queries (get from URL after creating knowledge base)"
-        )
-        vector_db_path: str = Field(
-            default="/app/backend/data/vector_db",
-            description="Path to ChromaDB vector database"
+            description="Open WebUI Knowledge Base ID (get UUID from URL after creating knowledge base)"
         )
         rag_top_k: int = Field(
             default=5,
@@ -50,7 +46,7 @@ class Filter:
     def __init__(self):
         self.valves = self.Valves()
         self._credentials_cache = None
-        self._chroma_client = None
+        self._vector_client = None
         self._mcp_call_log = []
 
     def _load_credentials(self) -> dict:
@@ -73,24 +69,24 @@ class Filter:
             "has_rag_access": True
         })
 
-    def _get_chroma_client(self):
-        """Get ChromaDB client - uses Open WebUI's singleton"""
-        if self._chroma_client is None:
+    def _get_vector_client(self):
+        """Get Open WebUI's internal vector store client for Knowledge Base queries"""
+        if self._vector_client is None:
             try:
                 from open_webui.retrieval.vector.factory import VECTOR_DB_CLIENT
                 if hasattr(VECTOR_DB_CLIENT, 'client'):
-                    self._chroma_client = VECTOR_DB_CLIENT.client
+                    self._vector_client = VECTOR_DB_CLIENT.client
                 else:
-                    self._chroma_client = VECTOR_DB_CLIENT
+                    self._vector_client = VECTOR_DB_CLIENT
             except ImportError as e:
-                print(f"[MCP Router] Could not import Open WebUI client: {e}")
+                print(f"[MCP Router] Could not import Open WebUI vector client: {e}")
                 return None
-        return self._chroma_client
+        return self._vector_client
 
-    def _query_rag(self, query: str) -> Optional[list]:
-        """Query RAG knowledge base directly via ChromaDB"""
+    def _query_knowledge_base(self, query: str) -> Optional[list]:
+        """Query Open WebUI Knowledge Base for relevant documents"""
         try:
-            client = self._get_chroma_client()
+            client = self._get_vector_client()
             if not client:
                 return None
             
@@ -428,8 +424,8 @@ class Filter:
         mcp_debug = ""
         
         if is_rag_query:
-            print(f"[MCP Router] Querying RAG knowledge base...")
-            rag_results = self._query_rag(user_content)
+            print(f"[MCP Router] Querying Open WebUI Knowledge Base...")
+            rag_results = self._query_knowledge_base(user_content)
             if rag_results:
                 print(f"[MCP Router] RAG found {len(rag_results)} results")
         else:
