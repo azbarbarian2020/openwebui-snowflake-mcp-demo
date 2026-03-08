@@ -24,6 +24,7 @@ A complete demonstration of using [Open WebUI](https://openwebui.com/) as a unif
 
 - **Snowflake Account** (Enterprise edition or trial)
 - **Docker Desktop** installed and running
+- **LLM Provider** - either [Ollama](https://ollama.ai) (free) or an OpenAI API key
 - **30-45 minutes** for setup
 
 ---
@@ -155,7 +156,39 @@ To stop later: `docker-compose down`
 
 ---
 
-### Step 7: Install the Filter Function (5 min)
+### Step 7: Configure an LLM Provider (5 min)
+
+Open WebUI is a chat interface that needs a language model to process queries. The filter function routes data questions to Snowflake, but you still need an LLM for the chat interface.
+
+#### Option A: Ollama (Free, Recommended)
+
+[Ollama](https://ollama.ai) runs open-source LLMs locally on your machine.
+
+1. **Install Ollama**:
+   - **Mac**: `brew install ollama` or download from [ollama.ai](https://ollama.ai)
+   - **Windows/Linux**: Download from [ollama.ai](https://ollama.ai)
+
+2. **Start Ollama and download a model**:
+   ```bash
+   ollama serve        # Start the Ollama server (runs in background)
+   ollama pull llama3.2  # Download a capable, lightweight model (~2GB)
+   ```
+
+3. **Verify in Open WebUI**:
+   - Refresh Open WebUI (http://localhost:3002)
+   - Click the model dropdown - you should see `llama3.2` available
+   - If not, go to Admin Panel → Settings → Connections and verify Ollama URL is `http://host.docker.internal:11434`
+
+#### Option B: OpenAI API (Paid)
+
+If you have an OpenAI account:
+1. Go to [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+2. Create an API key
+3. In Open WebUI: Admin Panel → Settings → Connections → OpenAI API → paste your key
+
+---
+
+### Step 8: Install the Filter Function (5 min)
 
 1. In Open WebUI, click **your avatar** (top right) → **Admin Panel**
 2. Go to **Functions** tab
@@ -168,7 +201,7 @@ To stop later: `docker-compose down`
 
 ---
 
-### Step 8: Create Knowledge Base for RAG (5 min)
+### Step 9: Create Knowledge Base for RAG (5 min)
 
 1. Go to **Workspace** → **Knowledge**
 2. Click **+ Create Knowledge Base**
@@ -188,7 +221,7 @@ To stop later: `docker-compose down`
 
 ---
 
-### Step 9: Create Test Users (5 min)
+### Step 10: Create Test Users (5 min)
 
 1. Go to **Admin Panel** → **Users**
 2. Create these users (passwords can be anything for demo):
@@ -203,7 +236,7 @@ To stop later: `docker-compose down`
 
 ---
 
-### Step 10: Test the Demo (5 min)
+### Step 11: Test the Demo (5 min)
 
 #### Test 1: Row-Level Security
 
