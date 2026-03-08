@@ -89,6 +89,8 @@ Your Snowflake account identifier is in your URL:
 
 ### Step 5: Configure Credentials (5 min)
 
+**IMPORTANT**: This step must be completed BEFORE starting Docker in Step 7.
+
 1. Copy the template:
    ```bash
    cp config/user_credentials.template.json config/user_credentials.json
@@ -128,9 +130,35 @@ Your Snowflake account identifier is in your URL:
    }
    ```
 
+3. **Verify the file exists** before proceeding:
+   ```bash
+   ls -la config/user_credentials.json
+   ```
+   You should see a file (not a directory). If you see `d` at the start of the permissions, something went wrong.
+
 ---
 
-### Step 6: Start Open WebUI (2 min)
+### Step 6: Install and Start Ollama (5 min)
+
+Open WebUI needs a language model. [Ollama](https://ollama.ai) runs open-source LLMs locally for free.
+
+1. **Install Ollama**:
+   - **Mac**: `brew install ollama` or download from [ollama.ai](https://ollama.ai)
+   - **Windows/Linux**: Download from [ollama.ai](https://ollama.ai)
+
+2. **Start Ollama and download a model** (run from any terminal):
+   ```bash
+   ollama serve          # Start the Ollama server (keep this running)
+   ```
+   
+   In a **new terminal**:
+   ```bash
+   ollama pull llama3.2  # Download a capable, lightweight model (~2GB)
+   ```
+
+---
+
+### Step 7: Start Open WebUI (2 min)
 
 From the repository directory, start the Docker container:
 
@@ -154,38 +182,12 @@ You should now see the Open WebUI chat interface.
 
 To stop later: `docker-compose down`
 
----
+#### Verify Ollama Connection:
 
-### Step 7: Configure an LLM Provider (5 min)
-
-Open WebUI is a chat interface that needs a language model to process queries. The filter function routes data questions to Snowflake, but you still need an LLM for the chat interface.
-
-#### Option A: Ollama (Free, Recommended)
-
-[Ollama](https://ollama.ai) runs open-source LLMs locally on your machine.
-
-1. **Install Ollama**:
-   - **Mac**: `brew install ollama` or download from [ollama.ai](https://ollama.ai)
-   - **Windows/Linux**: Download from [ollama.ai](https://ollama.ai)
-
-2. **Start Ollama and download a model** (run from any terminal):
-   ```bash
-   ollama serve          # Start the Ollama server (keep this running)
-   # In a new terminal:
-   ollama pull llama3.2  # Download a capable, lightweight model (~2GB)
-   ```
-
-3. **Verify in Open WebUI**:
-   - Refresh Open WebUI (http://localhost:3002)
-   - Click the model dropdown - you should see `llama3.2` available
-   - If not, go to Admin Panel → Settings → Connections and verify Ollama URL is `http://host.docker.internal:11434`
-
-#### Option B: OpenAI API (Paid)
-
-If you have an OpenAI account:
-1. Go to [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
-2. Create an API key
-3. In Open WebUI: Admin Panel → Settings → Connections → OpenAI API → paste your key
+1. Click the model dropdown at the top - you should see `llama3.2`
+2. If not visible, go to Admin Panel → Settings → Connections
+3. Verify Ollama URL is `http://host.docker.internal:11434`
+4. Click Save and refresh
 
 ---
 
