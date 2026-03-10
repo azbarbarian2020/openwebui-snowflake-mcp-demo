@@ -257,16 +257,18 @@ The `web_user` needs explicit access to query the knowledge base:
 4. Add `web_user@demo.local` to the access list
 5. Save
 
-#### Set Default Model for All Users:
+#### Grant Model Access to All Users:
 
-New users won't have a model selected by default. Configure a default:
+By default, models are not visible to non-admin users. You must explicitly grant access:
 
-1. As admin, go to **Admin Panel** → **Settings** → **Interface**
-2. Find **Default Model** setting
-3. Select `llama3.2` (or your preferred model)
+1. As admin, go to **Admin Panel** → **Settings** → **Models**
+2. Find `llama3.2` in the model list and click on it
+3. Under **Access**, either:
+   - Toggle **Public** to make it available to all users, **OR**
+   - Add each user individually (west_user, east_user, web_user)
 4. Click **Save**
 
-Alternatively, each user can select a model from the dropdown when they first log in.
+The default model is already set to `llama3.2:latest` via the `DEFAULT_MODELS` environment variable in `docker-compose.yml`, so no additional configuration is needed.
 
 ---
 
@@ -362,7 +364,6 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed technical documentation in
 | `docs/Technician_Reviews_2025.pdf` | Sample document for RAG |
 | `scripts/verify_setup.py` | Validation script |
 | `ARCHITECTURE.md` | Technical deep-dive |
-| `blog.md` | Blog article about the architecture |
 
 ---
 
